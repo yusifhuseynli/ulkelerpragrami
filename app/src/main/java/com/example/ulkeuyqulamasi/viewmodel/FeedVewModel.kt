@@ -62,7 +62,7 @@ class FeedVewModel(application: Application):BaseViewModel(application) {
                 .subscribeWith(object :DisposableSingleObserver<List<Country>>(){
                     override fun onSuccess(t: List<Country>) {
                         storeInSQLite(t)
-                        Toast.makeText(getApplication(),"Countries From SQLite",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(getApplication(),"Countries From API",Toast.LENGTH_SHORT).show()
 
 
                     }

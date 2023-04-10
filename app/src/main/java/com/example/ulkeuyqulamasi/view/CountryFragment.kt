@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.ulkeuyqulamasi.R
@@ -18,9 +19,9 @@ import com.example.ulkeuyqulamasi.viewmodel.CountryViewModel
 class CountryFragment : Fragment() {
 //    private lateinit var viewModel: CountryViewModel
     private val viewModel by activityViewModels<CountryViewModel>()
+    private lateinit var dataBinding: FragmentCountryBinding
 
 
-    private lateinit var binding:FragmentCountryBinding
     private var countryUuid=0
 
 
@@ -32,9 +33,10 @@ class CountryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentCountryBinding.inflate(inflater, container, false)
+        dataBinding= FragmentCountryBinding.inflate(inflater, container, false)
+        dataBinding=DataBindingUtil.inflate(inflater,R.layout.fragment_country,container,false)
         // Inflate the layout for this fragment
-        return binding.root
+        return dataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,6 +57,8 @@ class CountryFragment : Fragment() {
    private fun observeLiveData(){
         viewModel.countryLiveData.observe(viewLifecycleOwner, Observer { country->
             country?.let {
+                dataBinding.selectedCountry=country
+                /*
                 binding.countryName.text=country.countryName
                 binding.countryCapital.text=country.countryCapital
                 binding.countryCurrency.text=country.countryCurrency
@@ -64,6 +68,8 @@ class CountryFragment : Fragment() {
                     binding.countryImage.downloadFromUrl(country.imageUrl, placeholderProgressBar(it))
 
                 }
+
+                 */
             }
         })
     }

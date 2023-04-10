@@ -5,6 +5,7 @@ plugins {
     id 'androidx.navigation.safeargs'
 
 }
+apply plugin: 'com.android.application'
 
 android {
     namespace 'com.example.ulkeuyqulamasi'
@@ -39,9 +40,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding {
+        android.buildFeatures.dataBinding = true
+    }
     buildFeatures{
 
         viewBinding true
+        dataBinding true
         prefab true
     }
 }
